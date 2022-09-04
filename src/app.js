@@ -3,6 +3,7 @@ const cors = require("cors")
 const morgan = require("morgan")
 const { default: helmet } = require("helmet")
 const api = require("./api/api")
+const handleError = require("./error-handlers/errorHandler")
 
 const app = express()
 
@@ -14,5 +15,6 @@ app.use(express.json())
 
 // router
 app.use("/api", api)
+app.use(handleError)
 
 module.exports = app
