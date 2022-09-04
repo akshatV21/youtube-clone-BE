@@ -2,6 +2,7 @@ const CONTENTS = {}
 
 // success
 CONTENTS.REGISTERED_USER = "User registered successfully!"
+CONTENTS.LOGGED_IN = "User logged in!"
 
 // error
 
