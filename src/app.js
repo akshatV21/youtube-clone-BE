@@ -3,7 +3,7 @@ const cors = require("cors")
 const morgan = require("morgan")
 const { default: helmet } = require("helmet")
 const api = require("./api/api")
-const handleError = require("./error-handlers/errorHandler")
+const handleError = require("./error/errorHandler")
 
 const app = express()
 
