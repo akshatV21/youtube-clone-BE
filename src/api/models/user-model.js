@@ -1,4 +1,5 @@
-const { Schema, Types } = require("mongoose")
+const { hash } = require("bcrypt")
+const { Schema, Types, model } = require("mongoose")
 
 const userSchema = new Schema({
   username: { type: String, required: true },
@@ -27,3 +28,15 @@ const userSchema = new Schema({
   isCreator: { type: Boolean, default: false },
   channel: { type: Types.ObjectId, ref: "channels" },
 })
+
+// events
+userSchema.pre("save", function () {
+  if (!this.isModified("password")) return
+
+  const hashedPassword = hash(this.password, 4)
+  this.password = hashedPassword
+})
+
+const UserModel = model("user", userSchema)
+
+module.exports = UserModel
