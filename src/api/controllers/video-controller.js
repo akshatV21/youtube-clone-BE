@@ -1,4 +1,5 @@
 const CONTENTS = require("../../contents/contents")
+const NodeError = require("../../error/error-object")
 const VideoModel = require("../models/video-model")
 
 const httpPostNewVideo = async (req, res, next) => {
@@ -12,4 +13,15 @@ const httpPostNewVideo = async (req, res, next) => {
   }
 }
 
-module.exports = { httpPostNewVideo }
+const httpGetVideoById = async (req, res, next) => {
+  try {
+    const video = await VideoModel.findById(req.params.videoId, { private: false })
+    if (!video) throw new NodeError(404, "Video not found!")
+
+    res.status(200).json({ success: true, message: CONTENTS.GET_VIDEO, video: video })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { httpPostNewVideo, httpGetVideoById }

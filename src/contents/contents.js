@@ -4,6 +4,7 @@ const CONTENTS = {}
 CONTENTS.REGISTERED_USER = "User registered successfully!"
 CONTENTS.LOGGED_IN = "User logged in!"
 CONTENTS.VIDEO_POSTED = "Video posted successfully!"
+CONTENTS.GET_VIDEO = "Video fetched successfully!"
 
 // error
 

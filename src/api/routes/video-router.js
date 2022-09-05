@@ -7,4 +7,6 @@ const videoRouter = Router()
 
 videoRouter.post("/post", authorizeUser, validateVideoPostRequest, httpPostNewVideo)
 
+videoRouter.get("/:videoId", authorizeUser, httpGetVideoById)
+
 module.exports = videoRouter
