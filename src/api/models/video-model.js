@@ -1,6 +1,7 @@
 const { Schema, Types, model } = require("mongoose")
 
 const videoSchema = new Schema({
+  channelId: { type: Types.ObjectId, required: true },
   title: { type: String, required: true },
   description: { type: String, required: true },
   link: { type: String, required: true },
