@@ -1,6 +1,6 @@
 const CONTENTS = require("../../contents/contents")
 const UserModel = require("../models/user-model")
-const NodeError = require("../../error/errorHandler")
+const NodeError = require("../../error/error-object")
 const getUserIdFromToken = require("../../helpers/verifyToken")
 
 const validateRegisterRequest = async (req, res, next) => {
@@ -40,4 +40,4 @@ const authorizeUser = async (req, res, next) => {
   }
 }
 
-module.exports = { validateRegisterRequest, validateLoginRequest }
+module.exports = { validateRegisterRequest, validateLoginRequest, authorizeUser }

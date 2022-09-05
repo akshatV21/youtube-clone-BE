@@ -11,7 +11,7 @@ const videoSchema = new Schema({
   increasedSubCount: { type: Number, default: 0 },
   private: { type: Boolean, default: false },
   thumbnail: { type: String, required: true },
-  
+  category: { type: [String], required: true },
 })
 
 const VideoModel = model("video", videoSchema)

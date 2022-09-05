@@ -41,13 +41,13 @@ userSchema.pre("save", function () {
 })
 
 //statics
-userSchema.statics.findByInput = function (input) {
-  const userByUsername = this.findOne({ username: input })
+userSchema.statics.findByInput = async function (input) {
+  const userByUsername = await this.findOne({ username: input })
   if (userByUsername) return userByUsername
 
-  const userByEmail = this.findOne({ email: input })
+  const userByEmail = await this.findOne({ email: input })
   if (userByEmail) return userByEmail
-
+  console.log(userByEmail, input)
   return null
 }
 
