@@ -24,4 +24,9 @@ const httpGetVideoById = async (req, res, next) => {
   }
 }
 
+const httpGetReletedVideos = async (req, res, next) => {
+  const category = req.category
+  const videos = (await VideoModel.find({ category: { $in: category } })).reverse()
+}
+
 module.exports = { httpPostNewVideo, httpGetVideoById }

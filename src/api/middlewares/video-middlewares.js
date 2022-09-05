@@ -17,4 +17,17 @@ const validateVideoPostRequest = async (req, res, next) => {
   }
 }
 
-module.exports = { validateVideoPostRequest }
+const vlidateRelatedVideosRequest = (req, res, next) => {
+  const { category } = req.query
+
+  if (!category) {
+    req.category = req.user.interests
+    next()
+    return
+  }
+
+  req.category = category.split("%")
+  next()
+}
+
+module.exports = { validateVideoPostRequest, vlidateRelatedVideosRequest }
