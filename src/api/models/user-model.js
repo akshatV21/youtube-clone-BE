@@ -7,11 +7,13 @@ const userSchema = new Schema({
   email: { type: String, required: true },
   password: { type: String, required: true },
   settings: {
-    playerSize: { type: String },
-    volume: { type: Number },
+    playerSize: { type: String, default: "small" },
+    volume: { type: Number, default: 40 },
+    trackHistory: { type: Boolean, default: true },
   },
   interests: { type: [String] },
   watchLater: { type: [Types.ObjectId], default: [], ref: "videos" },
+  history: { type: [Types.ObjectId], default: [], ref: "videos" },
   playlists: {
     type: [
       {
@@ -40,10 +42,10 @@ userSchema.pre("save", function () {
 
 //statics
 userSchema.statics.findByInput = function (input) {
-  const userByUsername = this.find({ username: input })
+  const userByUsername = this.findOne({ username: input })
   if (userByUsername) return userByUsername
 
-  const userByEmail = this.find({ email: input })
+  const userByEmail = this.findOne({ email: input })
   if (userByEmail) return userByEmail
 
   return null
