@@ -28,4 +28,4 @@ const httpLoginUser = async (req, res, next) => {
   }
 }
 
-module.exports = { httpRegisterUser }
+module.exports = { httpRegisterUser, httpLoginUser }
