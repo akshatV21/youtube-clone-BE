@@ -14,20 +14,7 @@ const userSchema = new Schema({
   interests: { type: [String] },
   watchLater: { type: [Types.ObjectId], default: [], ref: "videos" },
   history: { type: [Types.ObjectId], default: [], ref: "videos" },
-  playlists: {
-    type: [
-      {
-        playlistName: String,
-        vidoes: [Types.ObjectId],
-        currentlyOn: {
-          videoIndex: { type: Number },
-          timestamp: { type: Number },
-        },
-      },
-    ],
-    default: [],
-    ref: "videos",
-  },
+  playlists: { type: [Types.ObjectId], default: [], ref: "playlists" },
   isCreator: { type: Boolean, default: false },
   channel: { type: Types.ObjectId, ref: "channels" },
 })
