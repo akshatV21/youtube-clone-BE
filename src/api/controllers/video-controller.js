@@ -1,13 +1,17 @@
 const CONTENTS = require("../../contents/contents")
 const NodeError = require("../../error/error-object")
 const VideoModel = require("../models/video-model")
+const ChannelModel = require("../models/channel-model")
 
 const httpPostNewVideo = async (req, res, next) => {
   try {
     const video = new VideoModel(req.video)
-    await video.save()
+    const channel = await ChannelModel.findById(req.user.channel)
 
-    res.status(201).json({ success: true, message: CONTENTS.VIDEO_POSTED })
+    channel.videos.push(video._id)
+    await Promise.all([channel.save(), video.save()])
+
+    res.status(201).json({ success: true, message: CONTENTS.VIDEO_POSTED, video: video })
   } catch (error) {
     next(error)
   }
