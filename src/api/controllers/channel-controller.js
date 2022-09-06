@@ -28,4 +28,19 @@ const httpGetChannel = async (req, res, next) => {
   }
 }
 
-module.exports = { httpCreateChannel, httpGetChannel }
+const httpSubscribeChannel = async (req, res, next) => {
+  try {
+    const channel = req.channel
+    const user = req.user
+
+    channel.subscribers.push(user._id)
+    user.subscribed.push(channel._id)
+
+    await Promise.all([channel.save(), user.save()])
+    res.status(200).json({ success: true, message: CONTENTS.SUBSCRIBED_CHANNEL })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { httpCreateChannel, httpGetChannel, httpSubscribeChannel }
