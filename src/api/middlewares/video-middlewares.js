@@ -1,5 +1,6 @@
 const CONTENTS = require("../../contents/contents")
 const NodeError = require("../../error/error-object")
+const VideoModel = require("../models/video-model")
 
 const validateVideoPostRequest = async (req, res, next) => {
   try {
@@ -34,4 +35,19 @@ const vlidateRelatedVideosRequest = (req, res, next) => {
   next()
 }
 
-module.exports = { validateVideoPostRequest, vlidateRelatedVideosRequest }
+const validateVideoLikeRequest = async (req, res, next) => {
+  try {
+    const videoId = req.query.videoId
+    if (!videoId) throw new NodeError(400, "Please provide video id!")
+
+    const video = await VideoModel.findById(videoId)
+    if (!video) throw new NodeError(404, "Cannot find video!")
+
+    req.video = video
+    next()
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { validateVideoPostRequest, vlidateRelatedVideosRequest, validateVideoLikeRequest }

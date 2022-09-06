@@ -8,6 +8,7 @@ CONTENTS.GET_VIDEO = "Video fetched successfully!"
 CONTENTS.CHANNEL_CREATED = "Channel created successfully!"
 CONTENTS.GET_CHANNEL = "Channel fetched successfully!"
 CONTENTS.SUBSCRIBED_CHANNEL = "Subscribed channel!"
+CONTENTS.LIKED_VIDEO = "Liked video!"
 
 // error
 
