@@ -35,7 +35,7 @@ const vlidateRelatedVideosRequest = (req, res, next) => {
   next()
 }
 
-const validateVideoLikeRequest = async (req, res, next) => {
+const validateVideoRequest = async (req, res, next) => {
   try {
     const videoId = req.query.videoId
     if (!videoId) throw new NodeError(400, "Please provide video id!")
@@ -50,4 +50,4 @@ const validateVideoLikeRequest = async (req, res, next) => {
   }
 }
 
-module.exports = { validateVideoPostRequest, vlidateRelatedVideosRequest, validateVideoLikeRequest }
+module.exports = { validateVideoPostRequest, vlidateRelatedVideosRequest, validateVideoRequest }

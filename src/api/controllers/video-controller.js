@@ -48,4 +48,13 @@ const httpLikeVideo = async (req, res, next) => {
   res.status(200).json({ success: true, message: CONTENTS.LIKED_VIDEO, videoLikes: video.likes })
 }
 
-module.exports = { httpPostNewVideo, httpGetVideoById, httpGetReletedVideos, httpLikeVideo }
+const httpDisLikesVideo = async (req, res, next) => {
+  const video = req.video
+
+  video.likes -= 1
+  await video.save()
+
+  res.status(200).json({ success: true, message: CONTENTS.DISLIKED_VIDEO, videoDisLikes: video.dislikes })
+}
+
+module.exports = { httpPostNewVideo, httpGetVideoById, httpGetReletedVideos, httpLikeVideo, httpDisLikesVideo }
