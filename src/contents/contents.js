@@ -6,6 +6,7 @@ CONTENTS.LOGGED_IN = "User logged in!"
 CONTENTS.VIDEO_POSTED = "Video posted successfully!"
 CONTENTS.GET_VIDEO = "Video fetched successfully!"
 CONTENTS.CHANNEL_CREATED = "Channel created successfully!"
+CONTENTS.GET_CHANNEL = "Channel fetched successfully!"
 
 // error
 
