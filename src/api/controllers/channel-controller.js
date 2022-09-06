@@ -43,4 +43,22 @@ const httpSubscribeChannel = async (req, res, next) => {
   }
 }
 
-module.exports = { httpCreateChannel, httpGetChannel, httpSubscribeChannel }
+const httpUnsubscribeChannel = async (req, res, next) => {
+  try {
+    const channel = req.channel
+    const user = req.user
+
+    const channelIdIndex = user.subscribed.findIndex(chnl => chnl._id === channel._id)
+    const userIdIndex = channel.subscribers.findIndex(subscriber => subscriber._id === user._id)
+
+    channel.subscribers.splice(userIdIndex, 1)
+    user.subscribed.splice(channelIdIndex, 1)
+
+    await Promise.all([channel.save(), user.save()])
+    res.status(200).json({ success: true, message: CONTENTS.SUBSCRIBED_CHANNEL })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { httpCreateChannel, httpGetChannel, httpSubscribeChannel, httpUnsubscribeChannel }
