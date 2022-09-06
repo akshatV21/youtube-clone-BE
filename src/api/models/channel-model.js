@@ -6,7 +6,7 @@ const channelSchema = new Schema({
   subscribers: { type: [Types.ObjectId], default: [], ref: "users" },
   totalViews: { type: Number, default: 0 },
   totalLikes: { type: Number, default: 0 },
-  videos: { type: [Types.ObjectId], default: [], ref: "videos" },
+  videos: { type: [Types.ObjectId], default: [], ref: "video" },
   playlists: { type: [Types.ObjectId], default: [], ref: "playlists" },
 })
 

@@ -20,9 +20,7 @@ const httpCreateChannel = async (req, res, next) => {
 const httpGetChannel = async (req, res, next) => {
   try {
     const user = req.user
-    const channel = await ChannelModel.findById(user.channel)
-
-    await Promise.all([channel.populate("videos"), channel.populate("playlists")])
+    const channel = await ChannelModel.findById(user.channel).populate("videos")
 
     res.status(200).json({ success: true, message: CONTENTS.GET_CHANNEL, channel: channel })
   } catch (error) {

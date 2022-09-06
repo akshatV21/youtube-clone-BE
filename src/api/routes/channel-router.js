@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { httpGetChannel } = require("../controllers/channel-controller")
+const { httpGetChannel, httpCreateChannel } = require("../controllers/channel-controller")
 const { authorizeUser } = require("../middlewares/auth-middlewares")
 
 const channelRouter = Router()

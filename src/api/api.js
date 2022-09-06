@@ -1,7 +1,7 @@
 const { Router } = require("express")
 const authRouter = require("./routes/auth-router")
-const channelRouter = require("./routes/channel-router")
 const videoRouter = require("./routes/video-router")
+const channelRouter = require("./routes/channel-router")
 
 const api = Router()
 

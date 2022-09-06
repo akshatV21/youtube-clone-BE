@@ -7,7 +7,7 @@ const videoSchema = new Schema({
   link: { type: String, required: true },
   likes: { type: Number },
   dislikes: { type: Number },
-  comments: { type: [Types.ObjectId], default: [], ref: "comments" },
+  comments: { type: [Types.ObjectId], default: [], ref: "comment" },
   views: { type: Number, default: 0 },
   increasedSubCount: { type: Number, default: 0 },
   private: { type: Boolean, default: false },
