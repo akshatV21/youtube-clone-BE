@@ -6,7 +6,7 @@ const validateVideoPostRequest = async (req, res, next) => {
   try {
     const user = req.user
 
-    if (!user.channel) throw new NodeError("403", "You must have a channel!")
+    if (!user.channel) throw new NodeError(403, "You must have a channel!")
 
     const { title, description, link, thumbnail, category } = req.body
     if (!title) throw new NodeError(400, CONTENTS.NULL_TITLE)
