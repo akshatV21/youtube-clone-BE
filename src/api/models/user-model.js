@@ -15,6 +15,7 @@ const userSchema = new Schema({
   watchLater: { type: [Types.ObjectId], default: [], ref: "videos" },
   history: { type: [Types.ObjectId], default: [], ref: "videos" },
   playlists: { type: [Types.ObjectId], default: [], ref: "playlists" },
+  likedVideos: { type: [Types.ObjectId], default: [], ref: "videos" },
   subscribed: { type: [Types.ObjectId], default: [], ref: "channel" },
   isCreator: { type: Boolean, default: false },
   channel: { type: Types.ObjectId, ref: "channels" },

@@ -40,12 +40,24 @@ const httpGetReletedVideos = async (req, res, next) => {
 }
 
 const httpLikeVideo = async (req, res, next) => {
-  const video = req.video
+  try {
+    const user = req.user
+    const video = req.video
 
-  video.likes += 1
-  await video.save()
+    if (user.likedVideos.includes(video._id)) {
+      const videoIdIndex = user.likedVideos.findIndex(id => id === video._id)
+      user.likedVideos.splice(videoIdIndex, 1)
+      video.likes - +1
+    } else {
+      user.likedVideos.push(video._id)
+      video.likes += 1
+    }
 
-  res.status(200).json({ success: true, message: CONTENTS.LIKED_VIDEO, videoLikes: video.likes })
+    await Promise.all([user.save(), video.save()])
+    res.status(200).json({ success: true, message: CONTENTS.LIKED_VIDEO, videoLikes: video.likes })
+  } catch (error) {
+    next(error)
+  }
 }
 
 const httpDisLikesVideo = async (req, res, next) => {
