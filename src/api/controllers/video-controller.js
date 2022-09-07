@@ -61,12 +61,24 @@ const httpLikeVideo = async (req, res, next) => {
 }
 
 const httpDisLikesVideo = async (req, res, next) => {
-  const video = req.video
+  try {
+    const user = req.user
+    const video = req.video
 
-  video.likes -= 1
-  await video.save()
+    if (user.dislikedVideos.includes(video._id)) {
+      const videoIdIndex = user.dislikedVideos.findIndex(id => id === video._id)
+      user.dislikedVideos.splice(videoIdIndex, 1)
+      video.dislikes - +1
+    } else {
+      user.dislikedVideos.push(video._id)
+      video.dislikes -= 1
+    }
 
-  res.status(200).json({ success: true, message: CONTENTS.DISLIKED_VIDEO, videoDisLikes: video.dislikes })
+    await Promise.all([user.save(), video.save()])
+    res.status(200).json({ success: true, message: CONTENTS.DISLIKED_VIDEO, videoDisLikes: video.dislikes })
+  } catch (error) {
+    next(error)
+  }
 }
 
 module.exports = { httpPostNewVideo, httpGetVideoById, httpGetReletedVideos, httpLikeVideo, httpDisLikesVideo }
