@@ -6,6 +6,7 @@ const { validateChannelRequest } = require("../middlewares/channel-middlewares")
 const channelRouter = Router()
 
 channelRouter.post("/create", authorizeUser, httpCreateChannel)
+channelRouter.post("/playlist", authorizeUser, validateChannelRequest)
 
 channelRouter.get("/", authorizeUser, validateChannelRequest, httpGetChannel)
 channelRouter.get("/videos", authorizeUser)

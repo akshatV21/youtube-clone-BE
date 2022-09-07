@@ -79,4 +79,8 @@ const httpGetChannelVideos = async (req, res, next) => {
   }
 }
 
+const httpCreateChannelPlaylist = (req, res, next) => {
+  const channel = req.channel
+}
+
 module.exports = { httpCreateChannel, httpGetChannel, httpSubscribeChannel, httpUnsubscribeChannel, httpGetChannelVideos }
