@@ -1,7 +1,7 @@
 const NodeError = require("../../error/error-object")
 const ChannelModel = require("../models/channel-model")
 
-const validateSubscribeRequest = async (req, res, next) => {
+const validateChannelRequest = async (req, res, next) => {
   try {
     const channelId = req.query.channelId
     if (!channelId) throw new NodeError(400, "Please provide channel id!")
@@ -16,4 +16,4 @@ const validateSubscribeRequest = async (req, res, next) => {
   }
 }
 
-module.exports = { validateSubscribeRequest }
+module.exports = { validateChannelRequest }

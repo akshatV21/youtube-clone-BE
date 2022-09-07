@@ -61,4 +61,22 @@ const httpUnsubscribeChannel = async (req, res, next) => {
   }
 }
 
-module.exports = { httpCreateChannel, httpGetChannel, httpSubscribeChannel, httpUnsubscribeChannel }
+const httpGetChannelVideos = async (req, res, next) => {
+  try {
+    const user = req.user
+    const channel = req.channel
+    let videos
+
+    if (user.channel === channel._id) {
+      videos = (await channel.populate({ path: "videos" })).videos
+    } else {
+      videos = (await channel.populate({ path: "videos", match: { private: false } })).videos
+    }
+
+    res.status(200).json({ success: true, message: CONTENTS.GET_CHANNEL_VIDEOS, videos })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { httpCreateChannel, httpGetChannel, httpSubscribeChannel, httpUnsubscribeChannel, httpGetChannelVideos }

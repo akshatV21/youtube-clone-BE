@@ -10,6 +10,7 @@ CONTENTS.GET_CHANNEL = "Channel fetched successfully!"
 CONTENTS.SUBSCRIBED_CHANNEL = "Subscribed channel!"
 CONTENTS.LIKED_VIDEO = "Liked video!"
 CONTENTS.DISLIKED_VIDEO = "Disliked video!"
+CONTENTS.GET_CHANNEL_VIDEOS = "Channel videos fetched successfully!"
 
 // error
 
