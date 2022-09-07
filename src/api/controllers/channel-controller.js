@@ -1,6 +1,7 @@
 const CONTENTS = require("../../contents/contents")
 const NodeError = require("../../error/error-object")
 const ChannelModel = require("../models/channel-model")
+const PlaylistModel = require("../models/playlist-model")
 
 const httpCreateChannel = async (req, res, next) => {
   try {
@@ -79,8 +80,21 @@ const httpGetChannelVideos = async (req, res, next) => {
   }
 }
 
-const httpCreateChannelPlaylist = (req, res, next) => {
+const httpCreateChannelPlaylist = async (req, res, next) => {
   const channel = req.channel
+  const playlist = { ...req.playlist, ownerId: channel._id }
+
+  const newPlaylist = new PlaylistModel(playlist)
+  await newPlaylist.save()
+
+  res.status(201).json({ success: true, message: "Playlist saved successfully!", playlist: newPlaylist })
 }
 
-module.exports = { httpCreateChannel, httpGetChannel, httpSubscribeChannel, httpUnsubscribeChannel, httpGetChannelVideos }
+module.exports = {
+  httpCreateChannel,
+  httpGetChannel,
+  httpSubscribeChannel,
+  httpUnsubscribeChannel,
+  httpGetChannelVideos,
+  httpCreateChannelPlaylist,
+}
