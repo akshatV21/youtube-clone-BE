@@ -85,8 +85,9 @@ const httpCreateChannelPlaylist = async (req, res, next) => {
   const playlist = { ...req.playlist, ownerId: channel._id }
 
   const newPlaylist = new PlaylistModel(playlist)
-  await newPlaylist.save()
+  channel.playlists.push(newPlaylist._id)
 
+  await Promise.all([channel.save(), newPlaylist.save()])
   res.status(201).json({ success: true, message: "Playlist saved successfully!", playlist: newPlaylist })
 }
 
