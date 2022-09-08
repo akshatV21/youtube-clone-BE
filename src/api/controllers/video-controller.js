@@ -83,11 +83,11 @@ const httpDisLikesVideo = async (req, res, next) => {
 
 const httpGetRecommendedVideos = async (req, res, next) => {
   try {
-    const videos = await VideoModel.find().sort({ _id: -1 }).limit(50)
+    const videos = await VideoModel.find({}).sort({ createdAt: -1 }).limit(50).populate("channelId", "name")
     res.status(200).json({ success: true, message: "Videos fetched successfully!", videos: videos })
   } catch (error) {
     next(error)
   }
 }
 
-module.exports = { httpPostNewVideo, httpGetVideoById, httpGetReletedVideos, httpLikeVideo, httpDisLikesVideo }
+module.exports = { httpPostNewVideo, httpGetVideoById, httpGetReletedVideos, httpLikeVideo, httpDisLikesVideo, httpGetRecommendedVideos }
