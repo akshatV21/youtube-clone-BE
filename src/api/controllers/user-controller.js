@@ -33,4 +33,15 @@ const httpCreateUserPlaylist = async (req, res, next) => {
   }
 }
 
-module.exports = { httpUpdateWatchLater, httpCreateUserPlaylist }
+const httpGetUser = async (req, res, next) => {
+  try {
+    const user = req.user
+    user.populate("subscribed")
+
+    res.status(200).json({ success: true, message: "User fetched successfully!", user: user })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = { httpUpdateWatchLater, httpCreateUserPlaylist, httpGetUser }
