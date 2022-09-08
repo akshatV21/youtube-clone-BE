@@ -15,6 +15,7 @@ videoRouter.post("/post", authorizeUser, validateVideoPostRequest, httpPostNewVi
 
 videoRouter.get("/:videoId", authorizeUser, httpGetVideoById)
 videoRouter.get("/releted", authorizeUser, vlidateRelatedVideosRequest, httpGetReletedVideos)
+videoRouter.get("/recommended", authorizeUser)
 
 videoRouter.patch("/like", authorizeUser, validateVideoRequest, httpLikeVideo)
 videoRouter.patch("/disLike", authorizeUser, validateVideoRequest, httpDisLikesVideo)
