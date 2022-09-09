@@ -19,7 +19,7 @@ const httpPostNewVideo = async (req, res, next) => {
 
 const httpGetVideoById = async (req, res, next) => {
   try {
-    const video = await VideoModel.findById(req.params.videoId, { private: false })
+    const video = await VideoModel.findById(req.params.videoId, { private: false }).populate("channelId", "name subscribers")
     if (!video) throw new NodeError(404, "Video not found!")
 
     res.status(200).json({ success: true, message: CONTENTS.GET_VIDEO, video: video })
